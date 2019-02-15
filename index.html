@@ -9,30 +9,28 @@
 </head>
 <body>
     <div class="main-container">
-        
-        
         <div class="buttons-container">
-            <div class="previous">0</div>
-            <div class="input">0</div>
-            <div class="button left-brac">(</div>
-            <div class="button right-brac">)</div>
-            <div class="button CE">C</div>
-            <div class="button 7" id="button 7">7</div>
-            <div class="button 8" id="button 8">8</div>
-            <div class="button 9" id="button 9">9</div>
-            <div class="button divide">/</div>
-            <div class="button 4" id="button 4">4</div>
-            <div class="button 5" id="button 5">5</div>
-            <div class="button 6" id="button 6">6</div>
-            <div class="button mul">*</div>
-            <div class="button 1" id="button 1">1</div>
-            <div class="button 2" id="button 2">2</div>
-            <div class="button 3" id="button 3">3</div>
-            <div class="button sub">-</div>
-            <div class="button 0"id="button 0">0</div>
-            <div class="button dec">.</div>
-            <div class="button eq">=</div>
-            <div class="button add">+</div>
+            <div class="previous" id="previous">0</div>
+            <div class="input" id="input">0</div>
+            <div class="button op left-brac" id="left">(</div>
+            <div class="button op right-brac" id="right">)</div>
+            <div class="button CE" id="clear">C</div>
+            <div class="button num 7" id="button 7">7</div>
+            <div class="button num 8" id="button 8">8</div>
+            <div class="button num 9" id="button 9">9</div>
+            <div class="button op divide" id="divide">/</div>
+            <div class="button num 4" id="button 4">4</div>
+            <div class="button num 5" id="button 5">5</div>
+            <div class="button num 6" id="button 6">6</div>
+            <div class="button op mul" id="multiply">*</div>
+            <div class="button num 1" id="button 1">1</div>
+            <div class="button num 2" id="button 2">2</div>
+            <div class="button num 3" id="button 3">3</div>
+            <div class="button op sub" id="subtract">-</div>
+            <div class="button num 0"id="button 0">0</div>
+            <div class="button op dec" id="decimal">.</div>
+            <div class="button eq" id="equals">=</div>
+            <div class="button op add" id="add">+</div>
         </div>
     </div>
 <script>
@@ -48,6 +46,52 @@
     var button_9 = document.getElementById('button 9')
     var button_0 = document.getElementById('button 0')
 
+    var numButtons = document.getElementsByClassName('num')
+
+    var button_left = document.getElementById('left')
+    var button_right = document.getElementById('right')
+    var button_div = document.getElementById('divide')
+    var button_mul = document.getElementById('multiply')
+    var button_sub = document.getElementById('subtract')
+    var button_dec = document.getElementById('decimal')
+    var button_add = document.getElementById('add')
+
+    var opButtons = document.getElementsByClassName('op')
+    var button_ce = document.getElementById('clear')
+    var button_eq = document.getElementById('equals')
+    var display_input = document.getElementById('input')
+    var display_previous = document.getElementById('previous')
+
+    var updateDisplay = (clickObj) => {
+        var text = clickObj.target.innerText;
+
+        if(display_input.innerText === '0')
+            display_input.innerText = '';
+
+        display_input.innerText+=text;
+    }
+
+    for(let i = 0; i < numButtons.length; i++){
+        numButtons[i].addEventListener('click', updateDisplay, false);
+    }
+
+    for(let i = 0; i < opButtons.length; i++){
+        opButtons[i].addEventListener('click', updateDisplay, false);
+    }
+
+    var clearDisplay = (clickObj) => {
+        display_input.innerText = '0';
+    }
+    
+    button_ce.addEventListener('click', clearDisplay, false)
+    
+    var answerDisplay = (clickObj) =>{
+        previous.innerText = display_input.innerText;
+        var ans = eval(display_input.innerText);
+        display_input.innerText = ans;
+    }
+
+    button_eq.addEventListener('click', answerDisplay, false)
 
 </script>
 </body>
